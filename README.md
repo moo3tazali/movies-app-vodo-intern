@@ -45,3 +45,7 @@ Open http://localhost:3000 to view the app in the browser.
 ## Contributing
 
 Feel free to submit issues and pull requests.
+
+## Live preview
+
+[My Movie App - Home](https://movies-app-vodo-intern.vercel.app/)

@@ -40,9 +40,9 @@ export const Search = () => {
           };
         });
 
-        setSearch(movies); // Set search results using the custom hook
+        setSearch({ data: movies, isSearching: true }); // Set search results using the custom hook
       } catch (error) {
-        setSearch([]);
+        setSearch({ data: [], isSearching: false });
         // Clear search results in case of error
       }
     };
@@ -54,7 +54,7 @@ export const Search = () => {
 
     // Clear the search results if the search query is less than 3 characters
     if (searchInput.length < 3) {
-      setSearch([]);
+      setSearch({ data: [], isSearching: false });
     }
 
     return () => {

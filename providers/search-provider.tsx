@@ -4,15 +4,21 @@ import { createContext, useState } from 'react';
 
 import { Movie } from '@/types';
 
+// Define the type for the state value
+interface SearchStateType {
+  data: Movie[];
+  isSearching: boolean;
+}
+
 // Define the type for the context value
 interface SearchContextType {
-  search: Movie[] | [];
-  setSearch: React.Dispatch<React.SetStateAction<Movie[] | []>>;
+  search: SearchStateType;
+  setSearch: React.Dispatch<React.SetStateAction<SearchStateType>>;
 }
 
 // Create the context with an initial value
 export const searchContext = createContext<SearchContextType>({
-  search: [],
+  search: { data: [], isSearching: false },
   setSearch: () => {},
 });
 
@@ -23,7 +29,10 @@ export default function SearchProvider({
   children: React.ReactNode;
 }) {
   // State to manage search data
-  const [search, setSearch] = useState<Movie[] | []>([]);
+  const [search, setSearch] = useState<SearchStateType>({
+    data: [],
+    isSearching: false,
+  });
 
   // Construct the context value
   const contextValue: SearchContextType = {

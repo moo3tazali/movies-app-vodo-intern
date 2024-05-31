@@ -18,7 +18,7 @@ export const PagesButtons = () => {
   };
 
   // Return the PagesButtons component if there is no search query
-  if (search.length > 0) return null;
+  if (search.isSearching) return null;
   return (
     <div className='mb-5'>
       <div className='text-center w-full mb-2 flex justify-center items-center'>

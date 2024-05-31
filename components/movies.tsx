@@ -4,22 +4,22 @@ import { useMovies } from '@/hooks/use-movies';
 import { MovieCard } from '@/components/movie-card';
 import { Loader } from '@/components/ui/loader';
 import { Error } from '@/components/ui/error';
+import { useSearch } from '@/hooks/use-search';
 
 export const Movies = () => {
   const { movies, status } = useMovies();
+  const { search } = useSearch();
 
   return (
     <>
       {status === 'loading' && <Loader />}
       {/* Show loader component if status is loading */}
 
-      {status === 'succeeded' && (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-          {movies.map((movie) => (
-            <MovieCard key={movie.id} data={movie} />
-          ))}
-        </div>
-      )}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+        {status === 'succeeded' && search.length === 0
+          ? movies.map((movie) => <MovieCard key={movie.id} data={movie} />)
+          : search.map((movie) => <MovieCard key={movie.id} data={movie} />)}
+      </div>
       {/* Render a MovieCard component for each movie */}
 
       {status === 'failed' && (

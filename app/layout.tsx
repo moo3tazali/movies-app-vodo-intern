@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/container';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import StoreProvider from '@/providers/store-provider';
+import SearchProvider from '@/providers/search-provider';
 
 // Define Rubik font configuration
 const rubik = Rubik({
@@ -32,7 +33,9 @@ export default function RootLayout({
       <body className={`${rubik.className} bg-slate-900 text-white`}>
         <Container>
           <Header />
-          <StoreProvider>{children}</StoreProvider>
+          <StoreProvider>
+            <SearchProvider>{children}</SearchProvider>
+          </StoreProvider>
           <Footer />
         </Container>
       </body>

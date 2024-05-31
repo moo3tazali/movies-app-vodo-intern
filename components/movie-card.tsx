@@ -13,7 +13,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   return (
     <div className='bg-white overflow-hidden rounded-md shadow-md flex flex-col gap-y-3'>
       <div className='xl:max-h-[450px]'>
-        <Link href={`/movies/${data.id}`}>
+        <Link href={`/movies/${data.id}`} as={`/movies/${data.id}`}>
           <Image
             priority
             width={600}

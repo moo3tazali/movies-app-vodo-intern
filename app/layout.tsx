@@ -1,4 +1,4 @@
-import './globals.css';
+import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
 
@@ -11,6 +11,7 @@ import StoreProvider from '@/providers/store-provider';
 const rubik = Rubik({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
+  preload: false,
 });
 
 // Metadata for the page

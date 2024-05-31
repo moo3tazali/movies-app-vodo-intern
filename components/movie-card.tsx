@@ -26,7 +26,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         {/* Link to movie detail page */}
       </div>
       <div className='px-4 pb-4 flex-1 flex flex-col gap-y-2 justify-between'>
-        <Link href={`/movies/${data.id}`}>
+        <Link href={`/movies/${data.id}`} as={`/movies/${data.id}`}>
           <h3 className='font-bold text-slate-800 cursor-pointer hover:text-blue-800 transition-colors'>
             {data.title}
           </h3>

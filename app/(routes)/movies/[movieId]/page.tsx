@@ -41,7 +41,7 @@ export default async function DetailPage({ params }: PageProps) {
         />
         {/* Heading component with dynamic description based on movie title */}
 
-        <Link href='/' className='mb-5 px-4'>
+        <Link href='/' as='/' className='mb-5 px-4'>
           <Button>Back</Button>
         </Link>
         {/* Button to navigate back to the home page */}

@@ -51,7 +51,12 @@ export const MovieDetails: React.FC<MovieDetailsProps> = async ({ data }) => {
 
             <span className='text-sm text-white/70'>
               {data.release_date} ({data.original_language.toUpperCase()}) |{' '}
-              {data.genres.join(', ')} <br /> {data.vote_average}/10 ⭐
+              {data.genres.join(', ')}
+              <br />
+              {data.vote_average
+                ? `${data.vote_average.toFixed(1)}/10`
+                : 'NA'}{' '}
+              ⭐
             </span>
             {/* Release date, original language, genres, and vote average */}
 

@@ -66,7 +66,12 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             </span>
             {/* Release date and original language */}
 
-            <span>{data.vote_average?.toFixed(2)}/10 ⭐</span>
+            <span>
+              {data.vote_average !== 0
+                ? `${data.vote_average?.toFixed(1)}/10`
+                : 'NA'}{' '}
+              ⭐
+            </span>
             {/* Average vote rating */}
           </div>
           {/* Div for movie metadata */}

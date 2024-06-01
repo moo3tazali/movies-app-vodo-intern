@@ -21,7 +21,7 @@ export const getMovie = async (id: string) => {
       overview: response.data.overview,
       poster_path: response.data.poster_path,
       release_date: response.data.release_date,
-      vote_average: response.data.vote_average.toFixed(2),
+      vote_average: response.data.vote_average,
     };
     return movie; // Return the movie details object
   } catch (error) {

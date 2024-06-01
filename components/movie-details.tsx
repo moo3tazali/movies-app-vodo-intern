@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
 import { MovieDetails as MovieType } from '@/types';
+import { isImageUrl } from '@/actions/isImageUrl';
+import noPoster from '@/public/no-poster.webp';
 
 // Interface defining the props for the MovieDetails component
 interface MovieDetailsProps {
@@ -8,7 +10,9 @@ interface MovieDetailsProps {
 }
 
 // MovieDetails component definition
-export const MovieDetails: React.FC<MovieDetailsProps> = ({ data }) => {
+export const MovieDetails: React.FC<MovieDetailsProps> = async ({ data }) => {
+  const posterUrl = `${process.env.BASE_POSTER_URL}${data.poster_path}`;
+  const checkImageUrl = await isImageUrl(posterUrl);
   return (
     <>
       <div
@@ -23,7 +27,7 @@ export const MovieDetails: React.FC<MovieDetailsProps> = ({ data }) => {
             <Image
               className='rounded-xl'
               priority
-              src={`${process.env.BASE_POSTER_URL}${data.poster_path}` || ''}
+              src={checkImageUrl ? posterUrl : noPoster.src}
               alt={data.title}
               width={300}
               height={450}

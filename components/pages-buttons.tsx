@@ -1,24 +1,22 @@
 'use client';
 
-import { useAppDispatch, useMovies } from '@/hooks/use-movies';
 import { Button } from '@/components/ui/button';
-import { fetchMovies, setPage } from '@/store/moviesSlice';
-import { useSearch } from '@/hooks/use-search';
+
+// Interface defining the props for the PageButtons component
+interface PageButtonsProps {
+  currentPage: number;
+  totalPages: number;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed' | 'searching';
+  handlePageChange: (page: number) => void;
+}
 
 // PagesButtons component definition
-export const PagesButtons = () => {
-  const { currentPage, status, totalPages } = useMovies();
-  const dispatch = useAppDispatch();
-  const { search } = useSearch();
-
-  // Function to handle page changes
-  const handlePageChange = (page: number) => {
-    dispatch(setPage(page)); // Dispatch action to set the current page
-    dispatch(fetchMovies(page)); // Dispatch action to fetch movies for the new page
-  };
-
-  // Return the PagesButtons component if there is no search query
-  if (search.isSearching) return null;
+export const PagesButtons: React.FC<PageButtonsProps> = ({
+  currentPage,
+  totalPages,
+  status,
+  handlePageChange,
+}) => {
   return (
     <div className='mb-5'>
       <div className='text-center w-full mb-2 flex justify-center items-center'>

@@ -17,10 +17,10 @@ export const Movies = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {status === 'succeeded' &&
-          !search.isSearching &&
+          search.status !== 'searching' &&
           movies.map((movie) => <MovieCard key={movie.id} data={movie} />)}
 
-        {search.isSearching &&
+        {search.status === 'searching' &&
           search.data.map((movie) => <MovieCard key={movie.id} data={movie} />)}
       </div>
       {/* Render a MovieCard component for each movie */}
@@ -32,7 +32,7 @@ export const Movies = () => {
           Could not load the movies right now 😥
         </Error>
       )}
-      {search.isSearching && search.data.length === 0 && (
+      {search.status === 'searching' && search.data.length === 0 && (
         <Error>No Results found 🤷‍♂️</Error>
       )}
       {/* Show error message if status is failed */}

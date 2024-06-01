@@ -1,7 +1,12 @@
 'use client';
-import type { Movie } from '@/types';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import type { Movie } from '@/types';
+import { isImageUrl } from '@/actions/isImageUrl';
+import noPoster from '@/public/no-poster.webp';
+import posterPlaceholder from '@/public/poster-placeholder.webp';
 
 // Interface defining the props for MovieCard component
 interface MovieCardProps {
@@ -10,6 +15,27 @@ interface MovieCardProps {
 
 // MovieCard component definition
 export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+  const [imgSrc, setImgSrc] = useState(posterPlaceholder.src);
+
+  useEffect(() => {
+    if (data.poster_path) {
+      const posterUrl = `${process.env.BASE_POSTER_URL}${data.poster_path}`;
+
+      // Check if the image URL is valid
+      const checkImageUrl = async (url: string) => {
+        const isImageUrlValid = await isImageUrl(url);
+        if (isImageUrlValid) {
+          setImgSrc(posterUrl);
+        } else {
+          setImgSrc(noPoster.src);
+        }
+      };
+      checkImageUrl(posterUrl);
+    } else {
+      setImgSrc(noPoster.src);
+    }
+  }, [data.poster_path]);
+
   return (
     <div className='bg-white overflow-hidden rounded-md shadow-md flex flex-col gap-y-3'>
       <div className='xl:max-h-[450px]'>
@@ -19,7 +45,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             width={600}
             height={900}
             className='w-full h-full cursor-pointer object-cover'
-            src={`${process.env.BASE_POSTER_URL}${data.poster_path}` || ''}
+            src={imgSrc}
             alt={data.title}
           />
         </Link>
@@ -40,7 +66,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             </span>
             {/* Release date and original language */}
 
-            <span>⭐ {data.vote_average?.toFixed(2)}/10</span>
+            <span>{data.vote_average?.toFixed(2)}/10 ⭐</span>
             {/* Average vote rating */}
           </div>
           {/* Div for movie metadata */}

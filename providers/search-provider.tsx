@@ -7,7 +7,9 @@ import { Movie } from '@/types';
 // Define the type for the state value
 interface SearchStateType {
   data: Movie[];
-  isSearching: boolean;
+  status: 'searching' | 'failed' | 'idle';
+  currentPage: number;
+  totalPages: number;
 }
 
 // Define the type for the context value
@@ -18,7 +20,7 @@ interface SearchContextType {
 
 // Create the context with an initial value
 export const searchContext = createContext<SearchContextType>({
-  search: { data: [], isSearching: false },
+  search: { data: [], status: 'idle', currentPage: 1, totalPages: 1 },
   setSearch: () => {},
 });
 
@@ -31,7 +33,9 @@ export default function SearchProvider({
   // State to manage search data
   const [search, setSearch] = useState<SearchStateType>({
     data: [],
-    isSearching: false,
+    status: 'idle',
+    currentPage: 1,
+    totalPages: 1,
   });
 
   // Construct the context value

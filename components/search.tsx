@@ -8,17 +8,17 @@ import { useSearch } from '@/hooks/use-search';
 
 export const Search = () => {
   const [searchInput, setSearchInput] = useState(''); // State to store the value of the search input
-  const { setSearch } = useSearch(); // Custom hook to manage search state
+  const { setSearch, search } = useSearch(); // Custom hook to manage search state
   const cancelAxiosRequest = useRef<Canceler | null>(null); // Reference to cancel Axios requests
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (page = 1) => {
       try {
         cancelAxiosRequest.current && cancelAxiosRequest.current();
         // Cancel previous request if any
 
         const response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?query=${searchInput}&api_key=${process.env.API_KEY}`,
+          `https://api.themoviedb.org/3/search/movie?query=${searchInput}&page=${page}&api_key=${process.env.API_KEY}`,
           {
             cancelToken: new axios.CancelToken((c) => {
               cancelAxiosRequest.current = c;
@@ -39,29 +39,41 @@ export const Search = () => {
             genres: [],
           };
         });
+        // Total number of pages of movies
+        const totalPages = response.data.total_pages;
 
-        setSearch({ data: movies, isSearching: true }); // Set search results using the custom hook
+        setSearch({
+          data: movies,
+          status: 'searching',
+          totalPages,
+          currentPage: page,
+        }); // Set search results using the custom hook
       } catch (error) {
-        setSearch({ data: [], isSearching: false });
+        setSearch({
+          data: [],
+          status: 'failed',
+          totalPages: 1,
+          currentPage: 1,
+        });
         // Clear search results in case of error
       }
     };
 
     // Call the fetchData function when the form value changes
     if (searchInput.length > 2) {
-      fetchData();
+      fetchData(search.currentPage);
     }
 
     // Clear the search results if the search query is less than 3 characters
     if (searchInput.length < 3) {
-      setSearch({ data: [], isSearching: false });
+      setSearch({ data: [], status: 'idle', totalPages: 1, currentPage: 1 });
     }
 
     return () => {
       cancelAxiosRequest.current && cancelAxiosRequest.current();
       // Cancel the request when component unmounts or form changes
     };
-  }, [searchInput, setSearch]);
+  }, [searchInput, setSearch, search.currentPage]);
 
   // Function to handle changes in the search input
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

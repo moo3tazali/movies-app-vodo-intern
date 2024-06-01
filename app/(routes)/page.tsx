@@ -1,7 +1,7 @@
 import { Heading } from '@/components/ui/heading';
 import { Movies } from '@/components/movies';
-import { PagesButtons } from '@/components/pages-buttons';
 import { Search } from '@/components/search';
+import { ChangePages } from '@/components/change-pages';
 
 // Home page component definition
 export default function Home() {
@@ -13,8 +13,8 @@ export default function Home() {
       <Search />
       {/* Search component for searching movies */}
 
-      <PagesButtons />
-      {/* PagesButtons component for pagination controls */}
+      <ChangePages />
+      {/* ChangePages component for pagination controls */}
 
       <Movies />
       {/* Movies component to display the list of movies */}

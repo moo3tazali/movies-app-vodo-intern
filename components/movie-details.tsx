@@ -12,13 +12,17 @@ interface MovieDetailsProps {
 // MovieDetails component definition
 export const MovieDetails: React.FC<MovieDetailsProps> = async ({ data }) => {
   const posterUrl = `${process.env.BASE_POSTER_URL}${data.poster_path}`;
-  const checkImageUrl = await isImageUrl(posterUrl);
+  const backgroundImageUrl = `${process.env.BASE_POSTER_URL}${data.background_path}`;
+  const checkPosterUrl = await isImageUrl(posterUrl);
+  const checkBackgroundImage = await isImageUrl(backgroundImageUrl);
   return (
     <>
       <div
         className='bg-white/20 flex-1 bg-cover bg-center sm:rounded-lg overflow-hidden relative before:absolute before:w-full before:h-full before:bg-black/80'
         style={{
-          backgroundImage: `url(${process.env.BASE_POSTER_URL}${data.background_path})`,
+          backgroundImage: checkBackgroundImage
+            ? `url(${backgroundImageUrl})`
+            : 'none',
         }}
         // set background image
       >
@@ -27,7 +31,7 @@ export const MovieDetails: React.FC<MovieDetailsProps> = async ({ data }) => {
             <Image
               className='rounded-xl'
               priority
-              src={checkImageUrl ? posterUrl : noPoster.src}
+              src={checkPosterUrl ? posterUrl : noPoster.src}
               alt={data.title}
               width={300}
               height={450}

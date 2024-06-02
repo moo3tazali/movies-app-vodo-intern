@@ -1,7 +1,7 @@
 'use client';
 
 import { useMovies } from '@/hooks/use-movies';
-import { MovieCard } from '@/components/movie-card';
+import { MovieCard } from '@/components/home/movie-card';
 import { Loader } from '@/components/ui/loader';
 import { Error } from '@/components/ui/error';
 import { useSearch } from '@/hooks/use-search';

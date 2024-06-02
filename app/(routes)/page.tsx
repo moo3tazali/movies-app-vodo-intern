@@ -1,7 +1,7 @@
 import { Heading } from '@/components/ui/heading';
-import { Movies } from '@/components/movies';
-import { Search } from '@/components/search';
-import { ChangePages } from '@/components/change-pages';
+import { Movies } from '@/components/home/movies';
+import { Search } from '@/components/home/search';
+import { ChangePages } from '@/components/home/change-pages';
 
 // Home page component definition
 export default function Home() {

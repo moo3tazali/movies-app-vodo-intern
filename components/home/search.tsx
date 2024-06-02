@@ -63,6 +63,7 @@ export const Search = () => {
     // Call the fetchData function when the form value changes
     if (searchInput.length > 2) {
       const debouncedFetchData = debounce(fetchData, 1000);
+      // to delay the fetchData call for 1 second to avoid multiple requests during typing in the search input
       debouncedFetchData(search.currentPage);
     }
 

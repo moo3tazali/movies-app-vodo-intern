@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
 
 import { Container } from '@/components/ui/container';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
+import { Header } from '@/components/ui/header';
+import { Footer } from '@/components/ui/footer';
 import StoreProvider from '@/providers/store-provider';
 import SearchProvider from '@/providers/search-provider';
 

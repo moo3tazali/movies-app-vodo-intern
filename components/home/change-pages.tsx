@@ -3,7 +3,7 @@
 import { useAppDispatch, useMovies } from '@/hooks/use-movies';
 import { fetchMovies, setPage } from '@/store/moviesSlice';
 import { useSearch } from '@/hooks/use-search';
-import { PagesButtons } from '@/components/pages-buttons';
+import { PagesButtons } from '@/components/ui/pages-buttons';
 
 export const ChangePages = () => {
   const movies = useMovies();

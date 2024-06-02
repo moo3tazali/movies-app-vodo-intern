@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { getMovie } from '@/actions/get-movie';
-import { MovieDetails } from '@/components/movie-details';
+import { MovieDetails } from '@/components/overview/movie-details';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Error } from '@/components/ui/error';
-import { Cast } from '@/components/cast';
+import { Cast } from '@/components/overview/cast';
 import { getCast } from '@/actions/get-cast';
 
 // Interface defining the props for the page component
@@ -69,6 +69,7 @@ export default async function DetailPage({ params }: PageProps) {
             ))}
           </div>
         )}
+        {/* Cast component displayed if cast data is successfully fetched */}
       </main>
     </>
   );

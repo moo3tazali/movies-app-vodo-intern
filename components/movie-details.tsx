@@ -13,8 +13,10 @@ interface MovieDetailsProps {
 export const MovieDetails: React.FC<MovieDetailsProps> = async ({ data }) => {
   const posterUrl = `${process.env.BASE_POSTER_URL}${data.poster_path}`;
   const backgroundImageUrl = `${process.env.BASE_POSTER_URL}${data.background_path}`;
+
   const checkPosterUrl = await isImageUrl(posterUrl);
   const checkBackgroundImage = await isImageUrl(backgroundImageUrl);
+
   return (
     <>
       <div

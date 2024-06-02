@@ -26,3 +26,11 @@ export interface MovieDetails {
   original_language: string;
   vote_average: number;
 }
+
+export interface Cast {
+  id: number;
+  profile_path: string;
+  name: string;
+  character: string;
+  known_for_department: string;
+}

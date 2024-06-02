@@ -31,8 +31,8 @@ export const MovieDetails: React.FC<MovieDetailsProps> = async ({ data }) => {
         <div className='relative p-10 flex gap-4 flex-col md:flex-row items-center'>
           <div>
             <Image
-              className='rounded-xl'
-              priority
+              className='rounded-xl w-[300px] h-[450px]'
+              priority={false}
               src={checkPosterUrl ? posterUrl : noPoster.src}
               alt={data.title}
               width={300}

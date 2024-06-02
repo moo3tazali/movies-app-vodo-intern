@@ -20,6 +20,7 @@ export const Cast: React.FC<CastProps> = async ({ cast }) => {
   return (
     <div className='bg-white shadow-md rounded-lg p-4 flex flex-col items-center space-y-4 text-slate-900 min-w-[180px] min-h-[300px] max-h-[300px] overflow-hidden'>
       <Image
+        priority={false}
         src={checkUrl ? profileUrl : noAvatar}
         alt={cast.name}
         className='rounded-full'

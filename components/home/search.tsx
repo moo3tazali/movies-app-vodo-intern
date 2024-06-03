@@ -5,7 +5,6 @@ import axios, { Canceler } from 'axios';
 import { Search as SearchIcon } from 'lucide-react';
 
 import { useSearch } from '@/hooks/use-search';
-import { debounce } from '@/lib';
 
 export const Search = () => {
   const [searchInput, setSearchInput] = useState(''); // State to store the value of the search input
@@ -62,9 +61,7 @@ export const Search = () => {
 
     // Call the fetchData function when the form value changes
     if (searchInput.length > 2) {
-      const debouncedFetchData = debounce(fetchData, 1000);
-      // to delay the fetchData call for 1 second to avoid multiple requests during typing in the search input
-      debouncedFetchData(search.currentPage);
+      fetchData(search.currentPage);
     }
 
     // Clear the search results if the search query is less than 3 characters

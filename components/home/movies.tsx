@@ -17,7 +17,7 @@ export const Movies = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {status === 'succeeded' &&
-          search.status !== 'searching' &&
+          search.status === 'idle' &&
           movies.map((movie) => <MovieCard key={movie.id} data={movie} />)}
 
         {search.status === 'searching' &&
@@ -32,10 +32,12 @@ export const Movies = () => {
           Could not load the movies right now 😥
         </Error>
       )}
+      {/* Show error message if movies status is failed */}
+
       {search.status === 'searching' && search.data.length === 0 && (
         <Error>No Results found 🤷‍♂️</Error>
       )}
-      {/* Show error message if status is failed */}
+      {/* Show error message if search status is failed */}
     </>
   );
 };

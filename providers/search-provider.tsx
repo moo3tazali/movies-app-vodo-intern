@@ -7,7 +7,7 @@ import { Movie } from '@/types';
 // Define the type for the state value
 interface SearchStateType {
   data: Movie[];
-  status: 'searching' | 'failed' | 'idle';
+  status: 'searching' | 'failed' | 'idle' | 'loading';
   currentPage: number;
   totalPages: number;
 }

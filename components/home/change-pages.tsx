@@ -18,12 +18,12 @@ export const ChangePages = () => {
 
   // Function to handle page changes for search
   const handleSearchPageChange = (page: number) => {
-    setSearch({ ...search, currentPage: page });
+    setSearch((pre) => ({ ...pre, currentPage: page }));
   };
 
   return (
     <>
-      {search.status !== 'searching' && (
+      {search.status === 'idle' && movies.status !== 'failed' && (
         <PagesButtons
           currentPage={movies.currentPage}
           totalPages={movies.totalPages}
@@ -32,7 +32,7 @@ export const ChangePages = () => {
         />
       )}
 
-      {search.status === 'searching' && (
+      {search.status === 'searching' && search.data.length !== 0 && (
         <PagesButtons
           currentPage={search.currentPage}
           totalPages={search.totalPages}

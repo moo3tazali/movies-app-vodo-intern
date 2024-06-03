@@ -14,6 +14,11 @@ export const Search = () => {
   useEffect(() => {
     const fetchData = async (page = 1) => {
       try {
+        setSearch((prevState) => ({
+          ...prevState,
+          status: 'loading',
+        }));
+
         cancelAxiosRequest.current && cancelAxiosRequest.current();
         // Cancel previous request if any
 

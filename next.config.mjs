@@ -7,6 +7,7 @@ const nextConfig = {
         hostname: 'image.tmdb.org',
       },
     ],
+    unoptimized: true,
   },
   env: {
     API_KEY: process.env.API_KEY,
